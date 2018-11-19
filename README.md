@@ -11,4 +11,5 @@ E:\文件\Python脚本\密码管理器>pwdtool.py -help
         -d          删除数据
         -s          查询数据
         -del        删除数据库（慎用）
+        -open       查看原密码
         查询元素是指id,username,password这类变量
