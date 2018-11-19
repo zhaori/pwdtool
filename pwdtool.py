@@ -51,7 +51,6 @@ class sql_data(object):
         connt.close()
         print("delete a successfully")
 
-
 if __name__ == '__main__':
 
     Help="""
@@ -60,8 +59,10 @@ if __name__ == '__main__':
         -a          插入数据
         -u          更新数据
         -d          删除数据
+        -p          查看密码
         -s          查询数据
         -del        删除数据库（慎用）
+        -open       查看原密码
         查询元素是指id,username,password这类变量
     """
     s=sql_data()
@@ -78,16 +79,39 @@ if __name__ == '__main__':
         id = input("id:")
         user_name = input("username:")
         pass_word = input("password:")
-        salt=input("请输入密码验证口令：")
         email_ = input("Email:")
         url_ = input("url:")
-        note_ = input("not:")
+        note_ = input("note:")
+        pwd_hash = ha_hash(password=pass_word, salt=salt)
+        dict_li={
+            "username":{
+                user_name
+            },
+            pwd_hash:{
+                    pass_word
+                }
+        }
+        with open("pwd.json","a+",encoding="utf-8") as f:
+            f.write(str(dict_li))
         s.add_data(sql=data_1,num=id,username=user_name,password=ha_hash(password=pass_word,salt=salt),email=email_,url=url_,note=note_)
 
     elif sys.argv[1]=="-s":
         comd=input("输入查询元素：")
         table_1=input("输入表：")
         s.search_data(query=comd,table=table_1)
+
+    elif sys.argv[1]=="-p":
+        connt = sqlite3.connect(db_path)
+        con = connt.cursor()
+        sql_data = con.execute("select password from Windows")
+        all_table = sql_data.fetchall()
+        for i in all_table:
+            with open("pwd","w",encoding="utf-8") as f:
+                f.write(str(i[0]+"\n"))
+        connt.close()
+    elif sys.argv[1]=="-open":
+        with open("pwd.json","r",encoding="utf-8") as f1:
+            print(f1.read())
 
     elif sys.argv[1]=="-u":
         windows=input("表名：")
