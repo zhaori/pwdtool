@@ -21,15 +21,6 @@ def ha_hash(password,salt):
     text=hashlib.md5(data.encode("utf8"))
     return text.hexdigest()
 
-
 """
-#SQLite3数据库操作： 建库,建表,添加,查询,修改,删除
-
- 
-#C:\>sqlite3 mydatabase.db 
-#sqlite> create table user(id integer,username text,password text); 
-#sqlite> insert into user values(1,'king','king'); 
-#sqlite> select * from user; 
-#sqlite> update user set username='kong',password='kong' where id=1; 
-#sqlite> delete from user where username='kong';
+sql_mode可以自己修改，相应的data_1也要修改
 """
