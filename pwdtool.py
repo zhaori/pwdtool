@@ -56,7 +56,7 @@ class Save_Password(object):
                 '密码': i[2],
                 '邮箱': i[3],
                 '网址': i[4],
-                '备注': i[5]
+                '备注': bytes(i[5]).decode()
             }
             print(dict_data)
 
@@ -146,7 +146,6 @@ if __name__ == '__main__':
             'username': user_name,
             'SHA': sha.cal(pass_word),
             'password': pass_word,
-            #'url': url_data
         }
         s.add_sql(data)
         ss.add_sql(data_supper)
@@ -184,6 +183,14 @@ if __name__ == '__main__':
             )
             data = sql_data_pwd.fetchall()
             pwd_data = sql_d.fetchall()
+            #print(pwd_data)
+            print_data = {
+                '网址': str_to_tuple(data)[0],
+                '用户名': str_to_tuple(data)[1],
+                '加密密码': str_to_tuple(data)[2],
+                '真实密码': str_to_tuple(pwd_data)[2]
+            }
+            """
             for i in range(0, len(str_to_tuple(data))):
                 print_data = {
                     '网址': str_to_tuple(data)[int(i)][0],
@@ -192,7 +199,7 @@ if __name__ == '__main__':
                     '真实密码': str_to_tuple(pwd_data)[int(i)][2]
                     # '真实密码' : str_to_tuple(pwd_data[1])
                 }
-
-                print(print_data)
-
+             """
+            print(print_data)
+           
         aes.endb()
