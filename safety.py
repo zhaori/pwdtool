@@ -6,8 +6,7 @@ from config import *
 
 class SHA3(object):
     """
-    计算sha3  SHA1已经不安全了，而sha3只是说到目前为止尚未被攻破(2019/04/29)
-    不过，即便是被攻破了，但这种破解的代价是极大的，以个人之力难以负担
+    计算sha3  SHA1已经不安全了
     """
 
     @staticmethod
